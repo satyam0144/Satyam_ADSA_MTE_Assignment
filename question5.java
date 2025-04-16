@@ -1,0 +1,28 @@
+// Removed duplicate class definition
+// Find the maximum sum of any subarray of size K in a given array.
+
+public class question5 {
+    public static int maxSum(int[] arr, int k) {
+        int n = arr.length;
+        if (n < k) {
+            System.out.println("Invalid input: array size is less than k.");
+            return -1;
+        }
+        int maxSum = 0;
+        for (int i = 0; i < k; i++) {
+            maxSum += arr[i];
+        }
+        int windowSum = maxSum;
+        for (int i = k; i < n; i++) {
+            windowSum += arr[i] - arr[i - k];
+            maxSum = Math.max(maxSum, windowSum);
+        }
+        return maxSum;
+    }
+    public static void main(String[] args) {
+        int[] arr = {2, 1, 5, 1, 3, 2};
+        int k = 3;
+        int result = maxSum(arr, k);
+        System.out.println("Maximum sum of subarray of size " + k + " is: " + result);
+    }
+}
